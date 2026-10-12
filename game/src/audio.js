@@ -17,6 +17,11 @@ const SFX = {
   move:    [440, 0.05, 'square'],
   select:  [660, 0.09, 'square'],
   back:    [330, 0.08, 'square'],
+  jump:    [300, 0.12, 'square', 620],
+  scratch: [900, 0.10, 'sawtooth', 300],
+  ko:      [420, 0.16, 'triangle', 120],
+  hurt:    [260, 0.22, 'square', 70],
+  win:     [400, 0.50, 'square', 1200],
 };
 
 function playSfx(name) {

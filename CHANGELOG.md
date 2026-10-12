@@ -90,3 +90,28 @@ Climb from the floor to the top tier at the middle of the level, then drop back 
 
 #### Next (v06)
 Scratch attack, enemies, knockouts and wake-ups, and Mayor health.
+
+## v06
+
+### v06: Scratch, enemies, health
+
+#### What changed since v05
+- Scratch with J, Z or X. White claw marks flash in front of the Mayor for a moment. The hit area is a box in front of you (`scratchReach` in `config.js`).
+- `enemy.js`: two enemy kinds, both patrolling back and forth on whatever they stand on.
+  - Rat: knocked out for good. It shows `x_x`.
+  - Raccoon: knocked out for about 3 seconds, then wakes up. It shows `z z z` and flickers for the last 0.7 seconds as a warning. Scratching it again resets the timer.
+- Touching an awake enemy costs 1 HP, knocks you back and gives you about a second of invulnerability while you blink. Knocked-out enemies are harmless to touch.
+- Health shows as three red squares under the controls hint. At 0 HP the screen says OUT COLD and the level restarts.
+- Enemy placement is a list in `levels.js`: `[kind, patrol centre x, surface y, patrol half-width]`. Keep each patrol inside the platform it stands on.
+- Sound effects for jump, scratch, knockout, getting hurt and winning.
+
+#### Known rough edges
+- Enemies only patrol. They do not chase or attack.
+- Knocked-out enemies are shown by a dark tint and a text marker, not art.
+- The exit door still just shows LEVEL CLEAR and returns to the title.
+
+#### Try it
+Scratch a raccoon and watch it wake up. Scratch a rat and confirm it stays down. Let enemies hit you three times.
+
+#### Next (v07)
+The Big Dog boss fight: he throws things from the right side of the screen, you scratch them back at him.

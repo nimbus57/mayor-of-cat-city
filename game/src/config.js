@@ -24,6 +24,12 @@ const PLAYER = {
   coyoteMs: 90,     // still allowed to jump this long after walking off a ledge
   bufferMs: 110,    // a jump pressed this early before landing still counts
   dropMs: 300,      // Down + Jump on a platform ignores platforms for this long
+  maxHp: 3,
+  scratchMs: 160,         // how long the claws are out (and can hit)
+  scratchCooldownMs: 330, // minimum time between scratches
+  scratchReach: 46,       // how far in front of the Mayor a scratch reaches
+  invulnMs: 1200,         // time you cannot be hurt again after a hit
+  stunMs: 250,            // time you lose control after a hit
 };
 
 // Player settings that survive a page reload. Storage can be blocked

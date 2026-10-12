@@ -52,6 +52,14 @@ class LevelScene extends Phaser.Scene {
     );
     this.physics.add.overlap(this.player, this.door, () => this.completeLevel());
 
+    // Enemies patrol their platform. A scratch knocks them out; some wake back up.
+    this.enemies = this.physics.add.group();
+    for (const [type, x, y, range] of level.enemies) {
+      this.enemies.add(new Enemy(this, x, y, type, range));
+    }
+    this.physics.add.collider(this.enemies, this.platforms);
+    this.physics.add.overlap(this.player, this.enemies, (player, enemy) => this.onTouchEnemy(enemy));
+
     this.cameras.main.startFollow(this.player, true, 0.12, 0.12);
 
     // On-screen text stays put (scroll factor 0).
@@ -59,17 +67,41 @@ class LevelScene extends Phaser.Scene {
       fontFamily: FONT, fontSize: '22px', color: COLORS.ink,
     }).setOrigin(1, 0).setScrollFactor(0).setDepth(50);
 
-    this.add.text(16, 14, 'Arrows/WASD move   Space jump   Down+Space drop   Esc title', {
+    this.add.text(16, 14, 'Arrows/WASD move   Space jump   J scratch   Esc title', {
       fontFamily: FONT, fontSize: '14px', color: COLORS.dim,
     }).setScrollFactor(0).setDepth(50);
 
+    this.hud = makeHud(this, this.player);
+    this.hud.refresh();
+
     this.input.keyboard.on('keydown-ESC', (ev) => { if (!ev.repeat) this.scene.start('Title'); });
+  }
+
+  onTouchEnemy(enemy) {
+    if (this.ending || enemy.mode !== 'patrol') return;   // knocked-out enemies are harmless
+    if (this.player.hurt(this.now, enemy.x)) {
+      this.hud.refresh();
+      this.cameras.main.shake(120, 0.006);
+      if (this.player.hp <= 0) this.gameOver();
+    }
+  }
+
+  gameOver() {
+    if (this.ending) return;
+    this.ending = true;
+    this.physics.pause();
+    this.player.setTint(0x888888);
+    this.add.text(GAME_W / 2, GAME_H / 2 - 20, 'OUT COLD', {
+      fontFamily: FONT, fontSize: '64px', fontStyle: 'bold', color: COLORS.danger,
+    }).setOrigin(0.5).setScrollFactor(0).setDepth(60);
+    this.time.delayedCall(1400, () => this.scene.restart({ level: this.levelKey }));
   }
 
   completeLevel() {
     if (this.ending) return;
     this.ending = true;
     this.physics.pause();
+    playSfx('win');
     this.add.text(GAME_W / 2, GAME_H / 2 - 20, 'LEVEL CLEAR', {
       fontFamily: FONT, fontSize: '64px', fontStyle: 'bold', color: COLORS.accent,
     }).setOrigin(0.5).setScrollFactor(0).setDepth(60);
@@ -81,5 +113,17 @@ class LevelScene extends Phaser.Scene {
     this.now = time;
     this.sky.tilePositionX = this.cameras.main.scrollX * 0.3;
     this.player.update(time);
+
+    // Resolve the scratch against every enemy, once per enemy per swing.
+    const rect = this.player.scratchRect(time);
+    for (const enemy of this.enemies.getChildren()) {
+      enemy.update(time);
+      if (rect && !this.player.attackHits.has(enemy)
+          && Phaser.Geom.Intersects.RectangleToRectangle(rect, enemy.hitRect())) {
+        this.player.attackHits.add(enemy);
+        enemy.knockOut(time);
+        playSfx('ko');
+      }
+    }
   }
 }

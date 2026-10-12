@@ -20,6 +20,26 @@ function makeTextures(scene) {
     d.fillStyle(0x1b1b1b); d.fillRect(17, 16, 2, 4); d.fillRect(24, 16, 2, 4); // pupils
   });
 
+  // Alley rat, facing right. 28 x 20. Stays down once knocked out.
+  bake('rat', 28, 20, (d) => {
+    d.fillStyle(0xe0a0a8); d.fillRect(0, 15, 5, 2);                       // tail
+    d.fillStyle(0x9aa0b4); d.fillRect(3, 6, 20, 14);                      // body
+    d.fillRect(20, 8, 8, 10);                                             // head
+    d.fillCircle(21, 6, 4);                                               // ear
+    d.fillStyle(0xff4d4d); d.fillRect(24, 11, 2, 2);                      // eye
+    d.fillStyle(0x222222); d.fillRect(27, 14, 1, 2);                      // nose
+  });
+
+  // Raccoon thug, facing right. 30 x 28. Gets back up after a few seconds.
+  bake('raccoon', 30, 28, (d) => {
+    d.fillStyle(0x4b4658); d.fillRect(0, 14, 9, 12);                      // striped tail
+    d.fillStyle(0xb9b6c4); d.fillRect(2, 14, 2, 12); d.fillRect(6, 14, 2, 12);
+    d.fillStyle(0x8d8a99); d.fillRect(6, 10, 24, 18);                     // body
+    d.fillTriangle(18, 10, 21, 2, 25, 10); d.fillTriangle(25, 10, 28, 2, 30, 10); // ears
+    d.fillStyle(0x1e1c26); d.fillRect(18, 13, 12, 6);                     // mask
+    d.fillStyle(0xffffff); d.fillRect(21, 15, 2, 2); d.fillRect(26, 15, 2, 2);   // eyes
+  });
+
   // Neutral grey blocks. Levels colour them with setTint().
   bake('platform', 32, 16, (d) => {
     d.fillStyle(0xcfcfcf); d.fillRect(0, 0, 32, 16);

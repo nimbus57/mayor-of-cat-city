@@ -19,5 +19,20 @@ const LEVELS = {
       [2000, TIER.B, 200], [2300, TIER.C, 200], [2600, TIER.B, 200], [2850, TIER.A, 220],
       [3100, TIER.A, 160], [3300, TIER.B, 160],
     ],
+    // [kind, patrol centre x, surface y it stands on, patrol half-width]
+    // Keep the patrol inside the platform it stands on, or it will walk off.
+    enemies: [
+      ['rat', 700, GROUND_Y, 120],
+      ['rat', 380, TIER.A, 55],
+      ['raccoon', 1100, GROUND_Y, 150],
+      ['raccoon', 1090, TIER.B, 60],
+      ['rat', 1650, GROUND_Y, 160],
+      ['rat', 2100, TIER.B, 70],
+      ['raccoon', 2200, GROUND_Y, 200],
+      ['raccoon', 2400, TIER.C, 70],
+      ['raccoon', 2950, GROUND_Y, 180],
+      ['rat', 3180, TIER.A, 55],
+      ['rat', 3200, GROUND_Y, 150],
+    ],
   },
 };

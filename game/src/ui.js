@@ -1,3 +1,20 @@
+// The Mayor's health: a row of red squares in the top-left corner.
+// Call refresh() after the Mayor's hp changes.
+function makeHud(scene, player) {
+  const pips = [];
+  for (let i = 0; i < PLAYER.maxHp; i++) {
+    pips.push(
+      scene.add.rectangle(16 + i * 30, 44, 22, 22, 0xff6b6b)
+        .setOrigin(0).setStrokeStyle(2, 0xffffff, 0.6).setScrollFactor(0).setDepth(50),
+    );
+  }
+  return {
+    refresh() {
+      pips.forEach((p, i) => p.setFillStyle(i < player.hp ? 0xff6b6b : 0x3a2430));
+    },
+  };
+}
+
 // A vertical keyboard-and-pointer menu shared by the Title and Options scenes.
 // items: [{ label: string | () => string, action: () => void }]
 function buildMenu(scene, items, x, startY, gap) {
