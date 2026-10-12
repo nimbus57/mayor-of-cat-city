@@ -73,3 +73,20 @@ Walk right until the camera scrolls. Tap jump and hold jump and compare the heig
 
 #### Next (v05)
 Contra-style platform tiers to jump between, and an exit door.
+
+## v05
+
+### v05: Platform tiers and an exit
+
+#### What changed since v04
+- The level has three tiers of platforms above the floor (`TIER.A`, `TIER.B`, `TIER.C` in `levels.js`), 100px apart. A full jump rises about 123px, so each tier is one jump above the last.
+- Platforms are one-way. Jump up through them from below and land on top. This is the Contra feel.
+- Down + Jump while standing on a platform drops you through it. The floor is solid, so it does not drop.
+- An exit door at the far end of the level. Touching it shows LEVEL CLEAR and returns to the title. The real destination comes in later versions.
+- Platform data is a plain list of `[left x, top y, width]` in `levels.js`. To change the layout, edit the list.
+
+#### Try it
+Climb from the floor to the top tier at the middle of the level, then drop back down with Down + Space. Then reach the door at the far right.
+
+#### Next (v06)
+Scratch attack, enemies, knockouts and wake-ups, and Mayor health.

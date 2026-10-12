@@ -33,6 +33,13 @@ function makeTextures(scene) {
     d.fillStyle(0xa0a0a0); d.fillRect(0, 22, 32, 2);
   });
 
+  // Exit door: a glowing doorway in a wooden frame. 44 x 72.
+  bake('door', 44, 72, (d) => {
+    d.fillStyle(0x6b4f3a); d.fillRect(0, 0, 44, 72);
+    d.fillStyle(0xfff0b0); d.fillRect(6, 8, 32, 64);
+    d.fillStyle(0xffd24a); d.fillRect(6, 8, 32, 8);
+  });
+
   // Distant city, tiles horizontally. Seeded so it looks the same every run.
   bake('skyline', 480, 540, (d) => {
     let seed = 7;

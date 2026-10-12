@@ -1,11 +1,23 @@
 // Level data lives here so a level is just a list, not code.
-// v04 has an empty level: only the floor. Platforms arrive in v05.
+//
+// The level is a fixed 540px tall. Platforms sit on three tiers above the floor.
+// A full jump rises about 123px and the tiers are 100px apart, so each tier is
+// one jump above the last.
+const TIER = { A: 400, B: 300, C: 200 };   // y of the top surface of each tier
+
 const LEVELS = {
   museum: {
     name: 'The Museum',
     width: 3600,
     bg: '#1b2038',
     tint: 0x9aa4d6,     // colour applied to the grey platform and floor art
-    platforms: [],
+    exitX: 3480,        // x of the exit door, standing on the floor
+    // [left edge x, top surface y, width]
+    platforms: [
+      [300, TIER.A, 160], [560, TIER.A, 160], [700, TIER.B, 200],
+      [1000, TIER.B, 180], [1250, TIER.C, 200], [1500, TIER.A, 220], [1800, TIER.A, 160],
+      [2000, TIER.B, 200], [2300, TIER.C, 200], [2600, TIER.B, 200], [2850, TIER.A, 220],
+      [3100, TIER.A, 160], [3300, TIER.B, 160],
+    ],
   },
 };

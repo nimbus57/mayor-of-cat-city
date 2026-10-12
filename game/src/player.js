@@ -1,4 +1,5 @@
 // The Mayor. Walks, jumps, and faces the way it moves.
+// v05 adds dropping down through platforms with Down + Jump.
 class Mayor extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y) {
     super(scene, x, y, 'player');
@@ -17,6 +18,8 @@ class Mayor extends Phaser.Physics.Arcade.Sprite {
     this.facing = 1;
     this.coyoteUntil = 0;
     this.bufferUntil = 0;
+    this.dropUntil = 0;            // while time < this, one-way platforms are ignored
+    this.standingOneWay = false;   // set by the level's collider each frame
   }
 
   update(time) {
@@ -37,15 +40,24 @@ class Mayor extends Phaser.Physics.Arcade.Sprite {
     const Key = Phaser.Input.Keyboard;
     const pressed = Key.JustDown(k.space) || Key.JustDown(k.up) || Key.JustDown(k.w);
     const held = k.space.isDown || k.up.isDown || k.w.isDown;
+    const downHeld = k.down.isDown || k.s.isDown;
     if (pressed) this.bufferUntil = time + PLAYER.bufferMs;
 
     if (time <= this.bufferUntil && time <= this.coyoteUntil) {
-      this.setVelocityY(-PLAYER.jump);
+      if (downHeld && this.standingOneWay) {
+        // Down + Jump on a platform: fall through it instead of jumping.
+        this.dropUntil = time + PLAYER.dropMs;
+        this.setVelocityY(120);
+      } else {
+        this.setVelocityY(-PLAYER.jump);
+      }
       this.bufferUntil = 0;
       this.coyoteUntil = 0;
     }
 
     // Let go of jump early for a shorter hop.
     if (!held && body.velocity.y < -PLAYER.jumpCut) this.setVelocityY(-PLAYER.jumpCut);
+
+    this.standingOneWay = false;
   }
 }

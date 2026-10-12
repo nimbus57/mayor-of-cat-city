@@ -23,6 +23,7 @@ const PLAYER = {
   jumpCut: 200,     // releasing jump early caps the upward speed at this
   coyoteMs: 90,     // still allowed to jump this long after walking off a ledge
   bufferMs: 110,    // a jump pressed this early before landing still counts
+  dropMs: 300,      // Down + Jump on a platform ignores platforms for this long
 };
 
 // Player settings that survive a page reload. Storage can be blocked
