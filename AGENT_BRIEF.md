@@ -18,12 +18,13 @@ The latest tag (`git describe --tags`, currently `v08`) is complete: title, opti
 2. Commit it with a message like `v09: <short title>` and a body saying what changed, then tag that commit with the next version number (`git tag v09`, then `v10`, ...).
 3. Experiments go on a branch (`git switch -c try-touch-controls`). Merge to `main` only when accepted, then tag the merge as the next version.
 4. Never rewrite history. No amending, rebasing or force-pushing commits that already exist, and never move or delete a tag.
-5. Every commit on `main` must stay playable. Run `tools/smoke.py` against `game/index.html` (see the top of that file) and fix any console error before committing.
-6. Add a section to `CHANGELOG.md` for each version in the same shape as the others: what changed, known rough edges, what to try, what comes next.
-7. Append an entry to the Agent log in `NOTES.md`: what you changed, what you guessed, and any questions.
-8. Keep to the existing stack: plain JavaScript, Phaser 3.80.1 from the CDN, no build step, no new libraries, fixed 960x540. All art stays as generated placeholder shapes in `textures.js`. Do not add image or audio files.
-9. Put numbers in `config.js`, level layouts in `levels.js`, and enemy kinds in `enemy.js`, the way the existing code does.
-10. Do not claim something works unless you ran it. If you could not test something, say so in `NOTES.md`.
+5. The repo is on GitHub as `origin` (https://github.com/nimbus57/mayor-of-cat-city). Ask the designer before every push, and say what will go up: which branch, which commits and which tags. Push only after they say yes. A yes covers that push only, not later ones. If they say no, leave the work committed locally.
+6. Every commit on `main` must stay playable. Run `tools/smoke.py` against `game/index.html` (see the top of that file) and fix any console error before committing.
+7. Add a section to `CHANGELOG.md` for each version in the same shape as the others: what changed, known rough edges, what to try, what comes next.
+8. Append an entry to the Agent log in `NOTES.md`: what you changed, what you guessed, and any questions.
+9. Keep to the existing stack: plain JavaScript, Phaser 3.80.1 from the CDN, no build step, no new libraries, fixed 960x540. All art stays as generated placeholder shapes in `textures.js`. Do not add image or audio files.
+10. Put numbers in `config.js`, level layouts in `levels.js`, and enemy kinds in `enemy.js`, the way the existing code does.
+11. Do not claim something works unless you ran it. If you could not test something, say so in `NOTES.md`.
 
 ## What you may not decide
 The open design decisions at the bottom of `NOTES.md` and the questions in `docs/DESIGN_GAPS.md` belong to the designer. Do not pick for them. If a task depends on one, write your options and a recommendation into the Agent log and stop at that point. Do the parts that do not depend on it.
