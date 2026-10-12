@@ -14,7 +14,7 @@ const config = {
     TitleScene,
     OptionsScene,
     QuitScene,
-    new StubScene('Intro', 'Level', 'The opening story goes here.'),
+    IntroScene,
     new StubScene('Level', 'Overworld', 'The side-scrolling level goes here.'),
     new StubScene('Overworld', 'Title', 'The city map goes here.'),
   ],
