@@ -12,6 +12,7 @@ This project is built one small step at a time in git. Each step is one commit o
 
 ## Folders
 ```
+index.html          forwards to game/ (the entry point for GitHub Pages)
 game/               the game
 docs/               the design document (.docx, the source of truth), a text copy, and the gaps list
 tools/              smoke test and its step files
@@ -24,7 +25,9 @@ AGENT_BRIEF.md      rules for anyone (person or agent) continuing the work
 `docs/mayor_of_cat_city_design_doc(1).docx` is the design document and the source of truth. `docs/DESIGN.md` is a plain-text copy generated from it. `docs/DESIGN_GAPS.md` lists where the prototype and the design document disagree, and the questions waiting on the designer.
 
 ## Run it
-Open `game/index.html` in a desktop browser. It loads Phaser 3.80.1 from a CDN, so it needs an internet connection. To run offline, download `phaser.min.js` from the Phaser package, put it next to `index.html`, and change the script tag to point at it.
+Play it online at https://nimbus57.github.io/mayor-of-cat-city/ (GitHub Pages, serving `main`).
+
+Or open `game/index.html` in a desktop browser. It loads Phaser 3.80.1 from a CDN, so it needs an internet connection. To run offline, download `phaser.min.js` from the Phaser package, put it next to `index.html`, and change the script tag to point at it.
 
 ## Controls
 - Arrows or WASD: move
