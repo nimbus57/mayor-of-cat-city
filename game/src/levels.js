@@ -35,4 +35,31 @@ const LEVELS = {
       ['rat', 3200, GROUND_Y, 150],
     ],
   },
+
+  faire: {
+    name: 'Renaissance Faire',
+    width: 3200,
+    bg: '#2b2216',
+    tint: 0xd9b36a,
+    exitX: 3080,
+    platforms: [
+      [280, TIER.A, 180], [520, TIER.A, 140], [640, TIER.B, 200], [920, TIER.C, 180],
+      [1150, TIER.B, 160], [1350, TIER.A, 200], [1650, TIER.A, 160], [1800, TIER.B, 200],
+      [2080, TIER.C, 200], [2350, TIER.B, 160], [2550, TIER.A, 200], [2850, TIER.A, 140],
+    ],
+    enemies: [
+      ['rat', 370, TIER.A, 60],
+      ['raccoon', 700, GROUND_Y, 160],
+      ['raccoon', 740, TIER.B, 70],
+      ['rat', 1000, GROUND_Y, 140],
+      ['raccoon', 1010, TIER.C, 60],
+      ['rat', 1450, TIER.A, 70],
+      ['raccoon', 1600, GROUND_Y, 200],
+      ['rat', 1900, TIER.B, 70],
+      ['raccoon', 2180, TIER.C, 70],
+      ['rat', 2300, GROUND_Y, 160],
+      ['raccoon', 2650, TIER.A, 70],
+      ['raccoon', 2750, GROUND_Y, 150],
+    ],
+  },
 };

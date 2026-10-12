@@ -90,6 +90,6 @@ class IntroScene extends Phaser.Scene {
   }
 
   finish() {
-    this.scene.start('Level');
+    this.scene.start('Overworld');
   }
 }

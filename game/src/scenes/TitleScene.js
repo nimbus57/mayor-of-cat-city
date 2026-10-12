@@ -11,7 +11,7 @@ class TitleScene extends Phaser.Scene {
     }).setOrigin(0.5);
 
     buildMenu(this, [
-      { label: 'Start',   action: () => this.scene.start('Intro') },
+      { label: 'Start',   action: () => { Progress.reset(this); this.scene.start('Intro'); } },
       { label: 'Options', action: () => this.scene.start('Options') },
       { label: 'Quit',    action: () => this.scene.start('Quit') },
     ], GAME_W / 2, 320, 56);

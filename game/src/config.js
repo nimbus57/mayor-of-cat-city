@@ -44,6 +44,14 @@ const BOSS = {
   reflectSpeed: 620,     // speed of an item you scratched back
 };
 
+// Which locations the Mayor has cleared in this run. Kept in Phaser's shared registry,
+// so every scene sees the same thing. A new game starts with reset().
+const Progress = {
+  get(scene) { return scene.registry.get('cleared') || {}; },
+  mark(scene, key) { scene.registry.set('cleared', { ...this.get(scene), [key]: true }); },
+  reset(scene) { scene.registry.set('cleared', {}); },
+};
+
 // Player settings that survive a page reload. Storage can be blocked
 // (private windows, embeds), so every access is wrapped in try/catch.
 const Settings = {

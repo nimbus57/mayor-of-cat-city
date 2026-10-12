@@ -67,14 +67,14 @@ class LevelScene extends Phaser.Scene {
       fontFamily: FONT, fontSize: '22px', color: COLORS.ink,
     }).setOrigin(1, 0).setScrollFactor(0).setDepth(50);
 
-    this.add.text(16, 14, 'Arrows/WASD move   Space jump   J scratch   Esc title', {
+    this.add.text(16, 14, 'Arrows/WASD move   Space jump   J scratch   Esc map', {
       fontFamily: FONT, fontSize: '14px', color: COLORS.dim,
     }).setScrollFactor(0).setDepth(50);
 
     this.hud = makeHud(this, this.player);
     this.hud.refresh();
 
-    this.input.keyboard.on('keydown-ESC', (ev) => { if (!ev.repeat) this.scene.start('Title'); });
+    this.input.keyboard.on('keydown-ESC', (ev) => { if (!ev.repeat) this.scene.start('Overworld'); });
   }
 
   onTouchEnemy(enemy) {
@@ -105,10 +105,11 @@ class LevelScene extends Phaser.Scene {
     this.add.text(GAME_W / 2, GAME_H / 2 - 30, 'LEVEL CLEAR', {
       fontFamily: FONT, fontSize: '64px', fontStyle: 'bold', color: COLORS.accent,
     }).setOrigin(0.5).setScrollFactor(0).setDepth(60);
-    this.add.text(GAME_W / 2, GAME_H / 2 + 30, 'Next stop: Pawlice Station', {
+    this.add.text(GAME_W / 2, GAME_H / 2 + 30, 'Back to the map', {
       fontFamily: FONT, fontSize: '24px', color: COLORS.ink,
     }).setOrigin(0.5).setScrollFactor(0).setDepth(60);
-    this.time.delayedCall(2200, () => this.scene.start('Boss'));
+    Progress.mark(this, this.levelKey);
+    this.time.delayedCall(2200, () => this.scene.start('Overworld'));
   }
 
   update(time) {

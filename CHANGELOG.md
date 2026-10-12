@@ -139,3 +139,30 @@ Scratch a thrown item right as it reaches you. Then let a few hit you to see the
 
 #### Next (v08)
 The overworld map with the city's locations, which launches each level and the boss.
+
+## v08
+
+### v08: Overworld map
+
+#### What changed since v07
+- New `OverworldScene`: a city map with three locations connected by a road. Left/Right (or A/D) choose, Enter goes, Esc returns to the title. Mouse and touch work too.
+- Start now plays the intro and then lands on the map instead of dropping straight into a level.
+- Locations:
+  - The Museum: the level from earlier versions.
+  - Renaissance Faire: a second level with its own layout, colours and enemies. It uses the same level code, so adding a level is adding an entry in `levels.js`.
+  - Pawlice Station: the Big Dog fight. It stays locked (padlock icon) until the Museum and the Faire are cleared.
+- Clearing a level or the boss marks it with a green check on the map. Progress lives in `Progress` in `config.js` and resets when you pick Start on the title.
+- Esc inside a level or the boss fight now returns to the map.
+- After beating Big Dog the map says Cat City is yours.
+
+#### Known rough edges
+- Progress is not saved between page loads, only during a run.
+- Both levels are placeholder layouts and use the same two enemy types.
+- The boss fight happens at Pawlice Station only. There is no ending scene beyond the map message.
+- Keyboard only. There are no touch controls for the game itself.
+
+#### Try it
+Start a game, try the locked station first, then clear both levels (or walk to the exit door) and take on Big Dog.
+
+#### Next ideas (not started)
+The scratch and roar power bar, more enemy types, real art, touch controls, saving progress.
