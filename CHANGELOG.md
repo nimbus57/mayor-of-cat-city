@@ -54,3 +54,22 @@ Start a new game and press Enter once mid-sentence (it should finish the line), 
 
 #### Next (v04)
 The Mayor appears: walking and jumping on placeholder boxes in a scrolling, fixed-height level.
+
+## v04
+
+### v04: The Mayor walks and jumps
+
+#### What changed since v03
+- Start now leads from the intro into a real level: a 3600px wide, 540px tall scrolling stage with a floor and nothing else.
+- `player.js`: the `Mayor` class. Arrows or WASD to walk, Space / Up / W to jump. It faces the way it moves.
+- Jump feel: a short grace period after walking off a ledge (coyote time), a short buffer if you press jump just before landing, and a shorter hop if you let go of jump early. The numbers are in `PLAYER` in `config.js`.
+- `textures.js`: all art is generated from rectangles and triangles at startup. No image files. The Mayor is an orange box with ears and a red sash.
+- `levels.js`: level data (name, width, colours). Platforms are an empty list for now.
+- `LevelScene.js`: camera follows the Mayor, a slow-scrolling skyline sits behind. Esc returns to the title.
+- The leftover `StubScene` is gone because no stubs remain.
+
+#### Try it
+Walk right until the camera scrolls. Tap jump and hold jump and compare the heights.
+
+#### Next (v05)
+Contra-style platform tiers to jump between, and an exit door.

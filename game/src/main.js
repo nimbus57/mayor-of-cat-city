@@ -15,9 +15,8 @@ const config = {
     OptionsScene,
     QuitScene,
     IntroScene,
-    new StubScene('Level', 'Overworld', 'The side-scrolling level goes here.'),
-    new StubScene('Overworld', 'Title', 'The city map goes here.'),
+    LevelScene,
   ],
 };
 
-new Phaser.Game(config);
+const game = new Phaser.Game(config);

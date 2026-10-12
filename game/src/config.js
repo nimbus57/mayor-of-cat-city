@@ -13,6 +13,18 @@ const COLORS = {
   good: '#7bd88f',
 };
 
+// Physics and level constants. Pixels and milliseconds.
+const GRAVITY = 1100;
+const GROUND_Y = 500;   // top of the floor. The floor is 40px thick and ends at the bottom edge.
+
+const PLAYER = {
+  speed: 230,
+  jump: 520,        // takes off at this speed, so a full jump rises about 123px
+  jumpCut: 200,     // releasing jump early caps the upward speed at this
+  coyoteMs: 90,     // still allowed to jump this long after walking off a ledge
+  bufferMs: 110,    // a jump pressed this early before landing still counts
+};
+
 // Player settings that survive a page reload. Storage can be blocked
 // (private windows, embeds), so every access is wrapped in try/catch.
 const Settings = {

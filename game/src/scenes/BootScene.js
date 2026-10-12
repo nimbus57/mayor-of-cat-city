@@ -7,6 +7,7 @@ class BootScene extends Phaser.Scene {
     this.input.keyboard.addCapture('UP,DOWN,LEFT,RIGHT,SPACE');
     // Clicking the game gives it keyboard focus (matters when embedded in a page).
     this.input.on('pointerdown', () => window.focus());
+    makeTextures(this);
     this.scene.start('Title');
   }
 }
