@@ -1,0 +1,47 @@
+# Notes
+
+Where things stand, what was assumed, and what has and has not been checked.
+
+## Assumptions made (change any of these)
+- Phaser 3.80.1 from a CDN, plain script tags, no build step, no modules. Chosen for ease of editing.
+- Logical resolution is fixed at 960x540. The canvas scales to fit the page but keeps its shape.
+- Quit shows a Thanks for playing screen, because a web page cannot close its own tab.
+- Pawlice Station is the final level and holds the Big Dog fight, since the final level is where he throws things. The two levels before it are the Museum and the Renaissance Faire, which are location names from earlier design notes. Their layouts are placeholders.
+- Level layout: a floor plus one-way platforms on three tiers, 100px apart. A full jump rises about 123px.
+- Enemies: rats stay knocked out, raccoons wake after about 3.2 seconds. They only patrol. They do not chase.
+- Health: 3 hits. 0 HP restarts the level or the fight.
+- Boss: 5 reflected hits wins. He throws faster as he is hurt.
+- Added beyond what was asked, because they affect how a platformer feels: coyote time, jump buffering, variable jump height, and Down + Jump to drop through platforms.
+- The scratch/roar power bar from the earlier design is not built, as requested.
+
+## What was checked
+Every version was loaded in headless Chromium with Phaser 3.80.1 and played through a scripted run. No console errors in any version.
+- v01 to v03: scene flow, menu movement, Sound toggle, intro paging.
+- v04: walking, jumping, camera.
+- v05: jumping up through a platform and landing on it, dropping through with Down + Space, exit door returning to the title.
+- v06: scratch knocks out a rat (stays down) and a raccoon (wakes after about 3 seconds), contact damage, 0 HP restart.
+- v07: thrown item is reflected by a scratch, reflected item damages Big Dog, 5 hits ends the fight. This test caught one bug (the dog ignored reflected items), now fixed.
+- v08: the full loop Title, Intro, map, Museum, map, Faire, map, locked then unlocked station, boss, map, Title.
+
+## What was not checked
+- How the controls feel under a real keyboard. The tests drive the game with synthetic key events and by moving the Mayor directly. Jump height, speed, enemy speed and boss pacing are guesses until someone plays it.
+- Sound. The beeps are generated in code and the tests cannot hear them.
+- A full manual playthrough of either level from start to end, including whether every platform jump is comfortable.
+- Phones. The game needs a keyboard.
+- Whether the Sound setting survives a reload inside an embedded page. Storage may be blocked there.
+
+## Rough edges worth knowing
+- Knocked-out enemies are a dark tint plus a text marker, not art.
+- Progress on the map is not saved across page loads.
+- Both levels use the same two enemy types.
+- Thrown items aim at where you are when they are thrown and do not track you.
+
+## Open design decisions (belong to the game's designer)
+- What the scratch/roar power bar does: a resource, a charge-up or a cooldown, and what the roar does.
+- The full enemy roster and what each one does that is different.
+- Whether the Mayor should have a second attack, and whether the boss gets phases.
+- Art direction, and when to replace the placeholder shapes.
+- Whether touch controls matter.
+
+## Agent log
+Append one entry per working session: date, what changed, what was guessed, questions for the designer.

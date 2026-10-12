@@ -1,0 +1,6 @@
+[["press","Enter",600],["press","Escape",700],
+ ["down","Space",30],
+ ["eval","(async () => { const s = game.scene.getScene('Level'); const p = s.player; p.setPosition(380, 470); p.setVelocity(0, -520); let minY = 999, landedY = null; for (let i = 0; i < 120; i++) { await new Promise(r => setTimeout(r, 16)); minY = Math.min(minY, p.y); if (i > 8 && (p.body.blocked.down || p.body.touching.down)) { landedY = Math.round(p.y); break; } } return JSON.stringify({minY: Math.round(minY), landedY, note: 'one-way works if minY < 380 and landedY near 382'}); })()",50],
+ ["up","Space",100],
+ ["down","ArrowDown",50],["press","Space",50],["up","ArrowDown",100],
+ ["eval","(async () => { const p = game.scene.getScene('Level').player; for (let i = 0; i < 80; i++) { await new Promise(r => setTimeout(r, 16)); } return JSON.stringify({finalY: Math.round(p.y), note: 'drop worked if finalY near 482'}); })()",100]]
