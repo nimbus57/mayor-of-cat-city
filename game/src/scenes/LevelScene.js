@@ -102,10 +102,13 @@ class LevelScene extends Phaser.Scene {
     this.ending = true;
     this.physics.pause();
     playSfx('win');
-    this.add.text(GAME_W / 2, GAME_H / 2 - 20, 'LEVEL CLEAR', {
+    this.add.text(GAME_W / 2, GAME_H / 2 - 30, 'LEVEL CLEAR', {
       fontFamily: FONT, fontSize: '64px', fontStyle: 'bold', color: COLORS.accent,
     }).setOrigin(0.5).setScrollFactor(0).setDepth(60);
-    this.time.delayedCall(2200, () => this.scene.start('Title'));
+    this.add.text(GAME_W / 2, GAME_H / 2 + 30, 'Next stop: Pawlice Station', {
+      fontFamily: FONT, fontSize: '24px', color: COLORS.ink,
+    }).setOrigin(0.5).setScrollFactor(0).setDepth(60);
+    this.time.delayedCall(2200, () => this.scene.start('Boss'));
   }
 
   update(time) {

@@ -115,3 +115,27 @@ Scratch a raccoon and watch it wake up. Scratch a rat and confirm it stays down.
 
 #### Next (v07)
 The Big Dog boss fight: he throws things from the right side of the screen, you scratch them back at him.
+
+## v07
+
+### v07: Big Dog boss fight
+
+#### What changed since v06
+- New `BossScene`: a single-screen arena. Big Dog stands on the right as a solid wall. The Mayor has a floor and a few one-way platforms on the left.
+- Big Dog throws junk (a can, a bone or a boot) aimed at where you are. He flashes yellow a moment before each throw.
+- Scratch a thrown item and it flies back at him, glowing yellow. Only reflected items hurt him. Items that hit you cost 1 HP.
+- Five hits win. His health shows as a bar at the top right.
+- He gets faster as he is hurt: shorter gaps between throws and faster items. All the numbers are in `BOSS` in `config.js`.
+- Finishing the Museum level now leads to the boss. After the win the game returns to the title for now.
+- The art for Big Dog and the thrown items is placeholder shapes in `textures.js`.
+
+#### Known rough edges
+- The boss only throws. He has no other attacks and no phases.
+- Your health carries nothing between scenes. You start the boss fight at 3 HP.
+- The Pawlice Station is reached by finishing the Museum. A map to choose levels arrives in v08.
+
+#### Try it
+Scratch a thrown item right as it reaches you. Then let a few hit you to see the OUT COLD restart.
+
+#### Next (v08)
+The overworld map with the city's locations, which launches each level and the boss.

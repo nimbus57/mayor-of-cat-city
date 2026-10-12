@@ -32,6 +32,18 @@ const PLAYER = {
   stunMs: 250,            // time you lose control after a hit
 };
 
+// The Big Dog fight. Everything speeds up as he loses health.
+const BOSS = {
+  maxHp: 5,
+  firstThrowMs: 1800,    // pause before the first throw
+  startIntervalMs: 1700, // time between throws at full health
+  intervalStepMs: 220,   // faster by this much per hit taken
+  minIntervalMs: 700,
+  speed: 250,            // thrown item speed at full health
+  speedStep: 30,         // faster by this much per hit taken
+  reflectSpeed: 620,     // speed of an item you scratched back
+};
+
 // Player settings that survive a page reload. Storage can be blocked
 // (private windows, embeds), so every access is wrapped in try/catch.
 const Settings = {

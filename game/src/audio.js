@@ -22,6 +22,9 @@ const SFX = {
   ko:      [420, 0.16, 'triangle', 120],
   hurt:    [260, 0.22, 'square', 70],
   win:     [400, 0.50, 'square', 1200],
+  throw:   [220, 0.10, 'square', 150],
+  reflect: [500, 0.14, 'square', 950],
+  hit:     [200, 0.20, 'sawtooth', 60],
 };
 
 function playSfx(name) {

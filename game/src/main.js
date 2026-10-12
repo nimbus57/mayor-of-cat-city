@@ -16,6 +16,7 @@ const config = {
     QuitScene,
     IntroScene,
     LevelScene,
+    BossScene,
   ],
 };
 
