@@ -12,3 +12,25 @@ const COLORS = {
   danger: '#ff6b6b',
   good: '#7bd88f',
 };
+
+// Player settings that survive a page reload. Storage can be blocked
+// (private windows, embeds), so every access is wrapped in try/catch.
+const Settings = {
+  soundOn: true,
+
+  load() {
+    try {
+      const v = localStorage.getItem('mocc.sound');
+      if (v !== null) this.soundOn = v === '1';
+    } catch (e) { /* storage unavailable, keep defaults */ }
+  },
+
+  save() {
+    try { localStorage.setItem('mocc.sound', this.soundOn ? '1' : '0'); } catch (e) { /* ignore */ }
+  },
+
+  toggleSound() {
+    this.soundOn = !this.soundOn;
+    this.save();
+  },
+};

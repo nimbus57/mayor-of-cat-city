@@ -1,3 +1,5 @@
+Settings.load();
+
 const config = {
   type: Phaser.AUTO,
   width: GAME_W,
@@ -10,6 +12,8 @@ const config = {
   scene: [
     BootScene,
     TitleScene,
+    OptionsScene,
+    QuitScene,
     new StubScene('Intro', 'Level', 'The opening story goes here.'),
     new StubScene('Level', 'Overworld', 'The side-scrolling level goes here.'),
     new StubScene('Overworld', 'Title', 'The city map goes here.'),
