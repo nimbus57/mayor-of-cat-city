@@ -69,7 +69,8 @@ def run(target, steps, viewport=None):
         page.mouse.click(viewport[0] - 4, viewport[1] - 4)  # give the page keyboard focus, away from any menu item
         for act, arg, wait in steps:
             if act == 'press':
-                page.keyboard.press(arg)
+                # Hold briefly: a key released before the next game frame never counts as pressed in Phaser.
+                page.keyboard.press(arg, delay=50)
             elif act == 'down':
                 page.keyboard.down(arg)
             elif act == 'up':
