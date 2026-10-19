@@ -11,11 +11,11 @@ You are continuing a small browser game prototype kept in git. Before changing a
 A 2D side-scrolling platformer with a pun-heavy cat and police theme and a warm tone. The player is the interim mayor of Cat City. The last mayor quit. Big Dog and his animal hooligans hold the Pawlice Station. The player scratches enemies to knock them out (some wake back up), climbs Contra-style tiers of platforms, and finally scratches Big Dog's thrown items back at him. An overworld map links the locations.
 
 ## Current state
-The latest tag (`git describe --tags`, currently `v08`) is complete: title, options, intro, overworld, two levels, boss. It is a prototype. It may become the base of the real game, so read the code in `game/` before building on it.
+The latest tag (`git describe --tags`, currently `v09`) is complete: title, options, intro, overworld, two levels, boss, and on-screen touch buttons. It is a prototype. It may become the base of the real game, so read the code in `game/` before building on it.
 
 ## Rules for working
 1. Make one small change per commit. One new behavior per version, small enough that the designer can read the whole change in a few minutes.
-2. Commit it with a message like `v09: <short title>` and a body saying what changed, then tag that commit with the next version number (`git tag v09`, then `v10`, ...).
+2. Commit it with a message like `v10: <short title>` and a body saying what changed, then tag that commit with the next version number (`git tag v10`, then `v11`, ...).
 3. Experiments go on a branch (`git switch -c try-touch-controls`). Merge to `main` only when accepted, then tag the merge as the next version.
 4. Never rewrite history. No amending, rebasing or force-pushing commits that already exist, and never move or delete a tag.
 5. The repo is on GitHub as `origin` (https://github.com/nimbus57/mayor-of-cat-city). Ask the designer before every push, and say what will go up: which branch, which commits and which tags. Push only after they say yes. A yes covers that push only, not later ones. If they say no, leave the work committed locally.
@@ -30,7 +30,6 @@ The latest tag (`git describe --tags`, currently `v08`) is complete: title, opti
 The open design decisions at the bottom of `NOTES.md` and the questions in `docs/DESIGN_GAPS.md` belong to the designer. Do not pick for them. If a task depends on one, write your options and a recommendation into the Agent log and stop at that point. Do the parts that do not depend on it.
 
 ## Suggested next tasks, in order
-1. Playtest `v08` by reading the code and running the smoke tests. List anything that looks unfair, broken or confusing in `NOTES.md`. Do not fix design questions.
-2. Fix any real bugs found, committed and tagged as `v09`.
-3. Add touch controls (an on-screen left, right, jump and scratch) so the game can be tested on a phone, as `v10`.
-4. Stop and ask the designer about the power bar before building it.
+1. Playtest `v09` by reading the code and running the smoke tests. List anything that looks unfair, broken or confusing in `NOTES.md`. Do not fix design questions.
+2. Fix any real bugs found, committed and tagged as `v10`.
+3. Stop and ask the designer about the power bar before building it.

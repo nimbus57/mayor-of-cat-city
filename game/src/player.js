@@ -14,6 +14,8 @@ class Mayor extends Phaser.Physics.Arcade.Sprite {
       a: 'A', d: 'D', w: 'W', s: 'S', space: 'SPACE',
       j: 'J', z: 'Z', x: 'X',
     });
+    // On-screen buttons, if the scene made them (see touch.js). Read alongside the keys.
+    this.touch = scene.touch || null;
 
     this.facing = 1;
     this.hp = PLAYER.maxHp;
@@ -31,6 +33,7 @@ class Mayor extends Phaser.Physics.Arcade.Sprite {
 
   update(time) {
     const k = this.keys;
+    const t = this.touch ? this.touch.held : {};
     const body = this.body;
     const Key = Phaser.Input.Keyboard;
     const grounded = body.blocked.down || body.touching.down;
@@ -40,7 +43,7 @@ class Mayor extends Phaser.Physics.Arcade.Sprite {
 
     // Walking: instant start and stop. Skipped briefly after being hurt.
     if (!stunned) {
-      const dir = (k.right.isDown || k.d.isDown ? 1 : 0) - (k.left.isDown || k.a.isDown ? 1 : 0);
+      const dir = (k.right.isDown || k.d.isDown || t.right ? 1 : 0) - (k.left.isDown || k.a.isDown || t.left ? 1 : 0);
       this.setVelocityX(dir * PLAYER.speed);
       if (dir !== 0) {
         this.facing = dir;
@@ -49,9 +52,10 @@ class Mayor extends Phaser.Physics.Arcade.Sprite {
     }
 
     // Jumping, with a short grace period before landing and after leaving a ledge.
-    const jumpPressed = Key.JustDown(k.space) || Key.JustDown(k.up) || Key.JustDown(k.w);
-    const jumpHeld = k.space.isDown || k.up.isDown || k.w.isDown;
-    const downHeld = k.down.isDown || k.s.isDown;
+    const touchJump = this.touch !== null && this.touch.consume('jump');
+    const jumpPressed = touchJump || Key.JustDown(k.space) || Key.JustDown(k.up) || Key.JustDown(k.w);
+    const jumpHeld = k.space.isDown || k.up.isDown || k.w.isDown || !!t.jump;
+    const downHeld = k.down.isDown || k.s.isDown || !!t.down;
     if (jumpPressed) this.bufferUntil = time + PLAYER.bufferMs;
 
     if (!stunned && time <= this.bufferUntil && time <= this.coyoteUntil) {
@@ -71,7 +75,8 @@ class Mayor extends Phaser.Physics.Arcade.Sprite {
     if (!stunned && !jumpHeld && body.velocity.y < -PLAYER.jumpCut) this.setVelocityY(-PLAYER.jumpCut);
 
     // Scratch.
-    const scratchPressed = Key.JustDown(k.j) || Key.JustDown(k.z) || Key.JustDown(k.x);
+    const touchScratch = this.touch !== null && this.touch.consume('scratch');
+    const scratchPressed = touchScratch || Key.JustDown(k.j) || Key.JustDown(k.z) || Key.JustDown(k.x);
     if (scratchPressed && !stunned && time >= this.attackReadyAt) {
       this.attackUntil = time + PLAYER.scratchMs;
       this.attackReadyAt = time + PLAYER.scratchCooldownMs;

@@ -36,6 +36,7 @@ class BossScene extends Phaser.Scene {
     // Big Dog is a solid, immovable wall on the right.
     this.dog = this.physics.add.staticImage(865, GROUND_Y - 75, 'bigdog');
 
+    this.touch = new TouchControls(this, () => this.scene.start('Overworld'));
     this.player = new Mayor(this, 120, GROUND_Y - 60);
     this.physics.add.collider(
       this.player, this.platforms,

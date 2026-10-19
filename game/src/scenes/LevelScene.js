@@ -41,6 +41,7 @@ class LevelScene extends Phaser.Scene {
       fontFamily: FONT, fontSize: '18px', color: COLORS.accent,
     }).setOrigin(0.5);
 
+    this.touch = new TouchControls(this, () => this.scene.start('Overworld'));
     this.player = new Mayor(this, 80, GROUND_Y - 60);
     this.physics.add.collider(
       this.player, this.platforms,

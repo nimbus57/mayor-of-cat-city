@@ -166,3 +166,27 @@ Start a game, try the locked station first, then clear both levels (or walk to t
 
 #### Next ideas (not started)
 The scratch and roar power bar, more enemy types, real art, touch controls, saving progress.
+
+## v09
+
+### v09: Touch controls
+
+#### What changed since v08
+- On-screen buttons for phones and tablets, in the Museum, the Faire and the Big Dog fight: left, right and down for the left thumb, SCRATCH and JUMP for the right thumb, and a small MAP button at the top that works like Esc.
+- They show on touch devices only. Add `?touch=1` to the address to show them on a desktop and click them with the mouse, or `?touch=0` to hide them on a touch device.
+- The buttons do exactly what the keys do, so jump height, drop-through and the scratch timing are unchanged. Hold JUMP for a full jump, tap it for a short hop. Hold down, then tap JUMP, to drop through a platform.
+- Two or three fingers can press at once (run and jump together). Sliding a thumb from one arrow to the other switches direction without lifting.
+- A very quick tap still counts. Taps on JUMP and SCRATCH are remembered until the next frame reads them.
+- `touch.js` holds the buttons. Their positions, sizes and transparency are in `TOUCH` in `config.js`.
+- Menus, the intro and the map already worked with taps and are unchanged.
+
+#### Known rough edges
+- The Mayor starts each level under the left arrow button, and the buttons cover the bottom corners of the play area. They are see-through, but it is cramped on a small phone.
+- There is no on-screen way back from the map to the title (Esc only).
+- Tested with simulated touches in headless Chromium, not yet on a real phone.
+
+#### Try it
+On a phone, open the GitHub Pages link and play the Museum with your thumbs. On a desktop, add `?touch=1` to the address and click the buttons.
+
+#### Next
+Playtest on real phones and decide whether the button positions or sizes need to change.

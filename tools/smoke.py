@@ -15,8 +15,12 @@ Target defaults to game/index.html. It can be a path to an .html file or to a fo
 holds an index.html, relative to the current directory or to the repo root.
 To test an older version, check out its tag first (git checkout v05) or export it with git worktree.
 Set VIEWPORT=1000x900 to change the window size.
+Set TOUCH=1 to give the page a touchscreen (the game then shows its on-screen buttons).
+Set QUERY=?touch=1 to add a query string to the page URL.
 Each step is [action, argument, wait_ms]:
     press / down / up  a key name (Enter, Escape, ArrowRight, Space, j ...)
+    mouse              "down X Y", "move X Y" or "up": the mouse, in page pixels (game pixels at 960x540)
+    tap                "X Y": a touchscreen tap (needs TOUCH=1)
     shot               a name; saves tools/_shots/<label>_<name>.png (label is the folder name, e.g. game)
     eval               JavaScript run in the page (the Phaser game is the global `game`); result is printed
 
@@ -57,14 +61,15 @@ def run(target, steps, viewport=None):
     errors = []
     with sync_playwright() as p:
         browser = p.chromium.launch()
-        page = browser.new_page(viewport={'width': viewport[0], 'height': viewport[1]})
+        page = browser.new_page(viewport={'width': viewport[0], 'height': viewport[1]},
+                                has_touch=os.environ.get('TOUCH') == '1')
         # Software WebGL prints harmless GL performance warnings; ignore those.
         page.on('console', lambda m: errors.append(f'console.{m.type}: {m.text}')
                 if (m.type == 'error' or (m.type == 'warning' and 'GL' not in m.text)) else None)
         page.on('pageerror', lambda e: errors.append(f'pageerror: {e}'))
         page.route('https://cdnjs.cloudflare.com/**',
                    lambda r: r.fulfill(path=str(PHASER), content_type='application/javascript'))
-        page.goto(path.as_uri())
+        page.goto(path.as_uri() + os.environ.get('QUERY', ''))
         page.wait_for_timeout(800)
         page.mouse.click(viewport[0] - 4, viewport[1] - 4)  # give the page keyboard focus, away from any menu item
         for act, arg, wait in steps:
@@ -75,6 +80,17 @@ def run(target, steps, viewport=None):
                 page.keyboard.down(arg)
             elif act == 'up':
                 page.keyboard.up(arg)
+            elif act == 'mouse':
+                how, *xy = arg.split()
+                if xy:
+                    page.mouse.move(float(xy[0]), float(xy[1]))
+                if how == 'down':
+                    page.mouse.down()
+                elif how == 'up':
+                    page.mouse.up()
+            elif act == 'tap':
+                x, y = arg.split()
+                page.touchscreen.tap(float(x), float(y))
             elif act == 'shot':
                 page.screenshot(path=str(SHOTS / f'{label}_{arg}.png'))
             elif act == 'eval':

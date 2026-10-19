@@ -22,12 +22,13 @@ Every version was loaded in headless Chromium with Phaser 3.80.1 and played thro
 - v06: scratch knocks out a rat (stays down) and a raccoon (wakes after about 3 seconds), contact damage, 0 HP restart.
 - v07: thrown item is reflected by a scratch, reflected item damages Big Dog, 5 hits ends the fight. This test caught one bug (the dog ignored reflected items), now fixed.
 - v08: the full loop Title, Intro, map, Museum, map, Faire, map, locked then unlocked station, boss, map, Title.
+- v09: with a simulated touchscreen (`TOUCH=1`, `tools/steps_touch.json`): walk with the arrow buttons, slide a press from one arrow to the other, release, quick-tap jump, scratch, hold down + tap jump to drop through a platform, MAP button back to the map. Buttons hidden on desktop, shown with `?touch=1` and clickable with the mouse, hidden with `?touch=0`. All the older step files still pass.
 
 ## What was not checked
 - How the controls feel under a real keyboard. The tests drive the game with synthetic key events and by moving the Mayor directly. Jump height, speed, enemy speed and boss pacing are guesses until someone plays it.
 - Sound. The beeps are generated in code and the tests cannot hear them.
 - A full manual playthrough of either level from start to end, including whether every platform jump is comfortable.
-- Phones. The game needs a keyboard.
+- Real phones. The touch buttons (v09) were only driven by simulated touches, never by a thumb on a real screen.
 - Whether the Sound setting survives a reload inside an embedded page. Storage may be blocked there.
 
 ## Rough edges worth knowing
@@ -41,7 +42,14 @@ Every version was loaded in headless Chromium with Phaser 3.80.1 and played thro
 - The full enemy roster and what each one does that is different.
 - Whether the Mayor should have a second attack, and whether the boss gets phases.
 - Art direction, and when to replace the placeholder shapes.
-- Whether touch controls matter.
+- Touch controls: decided by the designer on 2026-10-19. On-screen buttons that copy the keyboard (built in v09), not tap-to-move gestures.
 
 ## Agent log
 Append one entry per working session: date, what changed, what was guessed, questions for the designer.
+
+### 2026-10-19
+- Changed: smoke tests fixed for v08 (separate commit, no tag), then v09 touch controls.
+- Found: `tools/smoke.py` pressed keys with zero hold time. Phaser forgets a key released before the next frame, so before this fix the scripted jumps, drops and scratches mostly did nothing, and the earlier "What was checked" entries for v04 to v06 probably did not test what they say. Presses are now held 50ms, and the movement, platform, combat and boss scripts were rerun against v08 and pass with the expected results.
+- Found: the movement, platform, combat and boss scripts were written for v04 to v07 and broke on v08, which added the map between the intro and the levels. Updated to go through the map.
+- Guessed: button positions and sizes (`TOUCH` in `config.js`), and that MAP sits top centre. Buttons show only on touch devices, with `?touch=1` / `?touch=0` to override.
+- Questions for the designer: after playing on a phone, are the buttons the right size and place? Should the Mayor's start point move out from under the left arrow? Is an on-screen way back from the map to the title wanted?

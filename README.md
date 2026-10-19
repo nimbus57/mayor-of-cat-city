@@ -36,7 +36,7 @@ Or open `game/index.html` in a desktop browser. It loads Phaser 3.80.1 from a CD
 - J, Z or X: scratch
 - Esc: back
 
-Keyboard only for now. There are no touch controls.
+On phones and tablets, on-screen buttons appear in the levels and the boss fight: left, right and down on the left, SCRATCH and JUMP on the right, MAP at the top. Add `?touch=1` to the address to show them on a desktop (click them with the mouse), or `?touch=0` to hide them.
 
 ## Layout of the game
 ```
@@ -44,6 +44,7 @@ game/index.html          loads Phaser, then every script in order
 game/src/config.js       constants: resolution, physics, player and boss numbers, settings, progress
 game/src/audio.js        synthesized sound effects
 game/src/ui.js           menu and health display helpers
+game/src/touch.js        on-screen buttons for touch devices
 game/src/textures.js     all placeholder art, drawn from shapes at startup
 game/src/levels.js       level data: platforms and enemy placement
 game/src/player.js       the Mayor
@@ -53,7 +54,7 @@ game/src/main.js         the Phaser config and scene list
 ```
 
 ## Testing
-`tools/smoke.py` plays a short scripted run of the game in headless Chromium and reports errors. It tests `game/index.html` by default, or a path you give it. See the top of that file. Step files for the main flows are in `tools/`.
+`tools/smoke.py` plays a short scripted run of the game in headless Chromium and reports errors. It tests `game/index.html` by default, or a path you give it. See the top of that file. Step files for the main flows are in `tools/`; run `steps_touch.json` with `TOUCH=1` set.
 
 ## Handing it to an agent
 See `AGENT_BRIEF.md`. Findings and open questions live in `NOTES.md` and `docs/DESIGN_GAPS.md`.

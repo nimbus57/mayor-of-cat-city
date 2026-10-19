@@ -44,6 +44,24 @@ const BOSS = {
   reflectSpeed: 620,     // speed of an item you scratched back
 };
 
+// On-screen buttons for touch devices (touch.js). Positions are in game pixels.
+const TOUCH = {
+  buttons: {            // [centre x, centre y, radius]
+    left: [80, 470, 46],
+    right: [196, 470, 46],
+    down: [138, 380, 38],
+    scratch: [762, 470, 48],
+    jump: [880, 452, 56],
+    back: [590, 32, 24],
+  },
+  hitPad: 1.2,          // touch area is this much bigger than the drawn circle, for thumbs
+  color: 0xffffff,
+  alpha: 0.18,          // button fill at rest
+  pressedAlpha: 0.45,   // button fill while held
+  strokeAlpha: 0.5,
+  pointers: 3,          // how many fingers can press at once
+};
+
 // Which locations the Mayor has cleared in this run. Kept in Phaser's shared registry,
 // so every scene sees the same thing. A new game starts with reset().
 const Progress = {
